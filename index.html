@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Cognitive Game Lab V2</title>
 
 <style>
@@ -10,61 +10,9 @@
 
 body{
   margin:0;
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:#f5f7f9;
-  color:#17202a;
-}
-
-.app{
-  max-width:800px;
-  margin:auto;
-  padding:24px 16px 50px;
-}
-
-header{text-align:center;margin-bottom:24px}
-
-.eyebrow{
-  font-size:12px;
-  letter-spacing:2px;
-  color:#6b7480;
-  font-weight:700;
-}
-
-h1{margin:6px 0;font-size:30px}
-
-.muted{color:#6b7480}
-
-.hidden{display:none!important}
-
-.games{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-.game-card{
-  min-height:125px;
-  padding:18px;
-  text-align:left;
-  border:1px solid #dce1e6;
-  border-radius:18px;
-  background:white;
-  cursor:pointer;
-}
-
-.game-card:hover{
-  border-color:#9ba5af;
-}
-
-.game-card b{
-  display:block;
-  font-size:17px;
-  margin-bottom:7px;
-}
-
-.game-card span{
-  font-size:14px;
-  color:#6b7480;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#f5f7fb;
+  color:#18202a;
 }
 
 button{
@@ -72,183 +20,1802 @@ button{
   cursor:pointer;
 }
 
-.primary,.secondary{
-  min-height:44px;
-  padding:10px 16px;
+.app{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:800;
+}
+
+.logo span{
+  color:#6574cd;
+}
+
+.nav{
+  display:flex;
+  gap:8px;
+}
+
+.nav button{
+  border:0;
+  background:white;
+  padding:10px 15px;
   border-radius:12px;
-  border:1px solid #dce1e6;
+  box-shadow:0 3px 12px #0000000d;
+}
+
+.screen{
+  display:none;
+}
+
+.screen.active{
+  display:block;
+}
+
+.hero{
+  background:white;
+  border-radius:24px;
+  padding:30px;
+  margin-bottom:22px;
+  box-shadow:0 8px 30px #0000000a;
+}
+
+.hero h1{
+  margin:0 0 8px;
+  font-size:32px;
+}
+
+.hero p{
+  color:#68717d;
+  margin:0;
+}
+
+.games{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:16px;
+}
+
+.card{
+  background:white;
+  border:2px solid transparent;
+  border-radius:20px;
+  padding:22px;
+  min-height:180px;
+  transition:.2s;
+  box-shadow:0 5px 20px #0000000a;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  border-color:#8994e8;
+}
+
+.icon{
+  font-size:35px;
+}
+
+.card h3{
+  margin:10px 0 5px;
+}
+
+.card p{
+  color:#737b86;
+  font-size:14px;
+  line-height:1.5;
 }
 
 .primary{
-  background:#e7edf4;
+  background:#6574cd;
+  color:white;
+  border:0;
+  padding:11px 18px;
+  border-radius:12px;
   font-weight:700;
 }
 
 .secondary{
-  background:white;
+  background:#eef0ff;
+  color:#4e5bb0;
+  border:0;
+  padding:11px 18px;
+  border-radius:12px;
+  font-weight:700;
 }
 
-.topbar{
+.game-top{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:12px;
-  margin-bottom:14px;
+  align-items:center;
+  margin-bottom:15px;
 }
 
-.topbar small{
-  display:block;
-  color:#6b7480;
-  margin-top:3px;
+.game-title{
+  font-size:24px;
+  font-weight:800;
+}
+
+.badge{
+  background:#eef0ff;
+  color:#4f5bb2;
+  padding:8px 13px;
+  border-radius:999px;
+  font-weight:700;
 }
 
 .panel{
   background:white;
-  border:1px solid #dce1e6;
-  border-radius:20px;
-  padding:22px;
+  border-radius:24px;
+  min-height:500px;
+  padding:30px;
+  box-shadow:0 8px 30px #0000000a;
+}
+
+.progress{
+  height:8px;
+  background:#edf0f5;
+  border-radius:99px;
+  overflow:hidden;
+  margin-bottom:30px;
+}
+
+.progress div{
+  height:100%;
+  width:0;
+  background:#6574cd;
+  transition:.3s;
+}
+
+.center{
   text-align:center;
 }
 
-#arena{
-  min-height:270px;
+.stimulus{
+  min-height:180px;
   display:flex;
-  align-items:center;
   justify-content:center;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:9px;
-  width:min(440px,100%);
-}
-
-.tile{
-  aspect-ratio:1;
-  border:1px solid #dce1e6;
-  border-radius:13px;
-  background:#fafbfc;
-  font-size:22px;
-}
-
-.tile.active{
-  background:#dce7f2;
-}
-
-.tile.correct{
-  background:#d8e9dc;
-}
-
-.tile.wrong{
-  opacity:.45;
-}
-
-.big-stimulus{
-  font-size:62px;
+  align-items:center;
+  font-size:70px;
   font-weight:800;
-  user-select:none;
+  margin:20px;
 }
 
 .choice-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  width:min(450px,100%);
+  gap:12px;
+  max-width:550px;
+  margin:20px auto;
 }
 
 .choice{
-  min-height:55px;
-  border:1px solid #dce1e6;
-  border-radius:13px;
-  background:white;
-}
-
-.choice:hover{
-  background:#f4f6f8;
-}
-
-.reaction{
-  width:220px;
-  height:180px;
-  border-radius:22px;
-  border:1px solid #dce1e6;
-  background:#f8fafb;
-  font-size:22px;
+  padding:20px;
+  border:2px solid #e8ebf1;
+  background:#fff;
+  border-radius:15px;
   font-weight:700;
 }
 
-.reaction.ready{
-  background:#e5ebf1;
+.choice:hover{
+  border-color:#6574cd;
 }
 
-.score-list{
-  display:grid;
-  gap:18px;
+.big-button{
+  padding:22px 45px;
+  border:0;
+  border-radius:18px;
+  font-size:22px;
+  font-weight:800;
+  background:#6574cd;
+  color:white;
 }
 
-.score-row{
-  display:grid;
-  gap:6px;
-}
-
-.score-header{
-  display:flex;
-  justify-content:space-between;
-}
-
-.bar{
-  height:9px;
-  background:#edf0f3;
-  border-radius:99px;
-  overflow:hidden;
-}
-
-.bar-fill{
-  height:100%;
-  background:#8d99a6;
+.feedback{
+  min-height:30px;
+  font-weight:700;
+  margin:15px;
 }
 
 .stats{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin:18px 0;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:25px;
 }
 
 .stat{
-  background:#f6f8fa;
-  border-radius:12px;
-  padding:12px 6px;
+  background:#f7f8fb;
+  border-radius:15px;
+  padding:15px;
 }
 
-.stat b{
+.stat small{
+  color:#747c88;
+}
+
+.stat strong{
   display:block;
-  font-size:19px;
+  font-size:23px;
+  margin-top:5px;
 }
 
-.stat span{
-  font-size:11px;
-  color:#6b7480;
+.profile-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
 }
 
-.note{
-  font-size:12px;
-  color:#6b7480;
-  margin-top:24px;
+.profile-card{
+  background:white;
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 5px 20px #0000000a;
 }
 
-#feedback{
-  min-height:25px;
-  margin-top:12px;
+.profile-card h3{
+  margin-top:0;
+}
+
+.bar{
+  height:8px;
+  background:#edf0f5;
+  border-radius:99px;
+  overflow:hidden;
+  margin-top:10px;
+}
+
+.bar div{
+  height:100%;
+  background:#6574cd;
 }
 
 .tower{
   display:flex;
-  align-items:flex-end;
   justify-content:center;
-  gap:30px;
-  height:210px;
+  gap:45px;
+  margin:30px 0;
 }
 
-.peg
+.peg{
+  width:150px;
+  height:220px;
+  border-bottom:8px solid #7a8190;
+  position:relative;
+  display:flex;
+  flex-direction:column-reverse;
+  align-items:center;
+  padding-bottom:5px;
+}
+
+.peg.selected{
+  border-color:#6574cd;
+}
+
+.disk{
+  height:30px;
+  border-radius:8px;
+  margin:2px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-weight:800;
+}
+
+.disk1{width:45px;background:#6574cd}
+.disk2{width:70px;background:#7583d4}
+.disk3{width:95px;background:#8792df}
+.disk4{width:120px;background:#9aa4e5}
+.disk5{width:140px;background:#abb4eb}
+
+.rules{
+  background:#f7f8fb;
+  padding:15px;
+  border-radius:14px;
+  color:#626a76;
+  font-size:14px;
+  line-height:1.6;
+}
+
+@media(max-width:650px){
+  .app{padding:14px}
+  .hero h1{font-size:25px}
+  .panel{padding:18px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .tower{gap:8px}
+  .peg{width:95px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <div class="logo">Cognitive <span>Game Lab</span> <small>V2</small></div>
+  <div class="nav">
+    <button onclick="showScreen('home')">Games</button>
+    <button onclick="showProfile()">Profile</button>
+  </div>
+</header>
+
+
+<!-- HOME -->
+<section id="home" class="screen active">
+
+  <div class="hero">
+    <h1>🧠 Cognitive Game Lab</h1>
+    <p>
+      Cognitive training-style games covering memory, attention,
+      inhibition, flexibility, processing speed and planning.
+    </p>
+  </div>
+
+  <div class="games">
+
+    <div class="card">
+      <div class="icon">🧠</div>
+      <h3>Sequence Memory</h3>
+      <p>จำลำดับตำแหน่งและทำซ้ำให้ถูกต้อง</p>
+      <button class="primary" onclick="startGame('memory')">เล่น</button>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔢</div>
+      <h3>N-Back</h3>
+      <p>ตรวจจับ stimulus ที่ตรงกับตำแหน่งย้อนหลัง</p>
+      <button class="primary" onclick="startGame('nback')">เล่น</button>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎨</div>
+      <h3>Stroop</h3>
+      <p>เลือกสีหมึกโดยไม่สนใจความหมายของคำ</p>
+      <button class="primary" onclick="startGame('stroop')">เล่น</button>
+    </div>
+
+    <div class="card">
+      <div class="icon">➡️</div>
+      <h3>Flanker</h3>
+      <p>ตอบทิศทางของลูกศรตรงกลางท่ามกลาง distractors</p>
+      <button class="primary" onclick="startGame('flanker')">เล่น</button>
+    </div>
+
+    <div class="card">
+      <div class="icon">⚡</div>
+      <h3>Reaction Time</h3>
+      <p>วัดเวลาตอบสนองต่อ visual stimulus</p>
+      <button class="primary" onclick="startGame('reaction')">เล่น</button>
+    </div>
+
+    <div class="card">
+      <div class="icon">🛑</div>
+      <h3>Go / No-Go</h3>
+      <p>กดเมื่อเป็น Go และยับยั้งการตอบสนองเมื่อเป็น No-Go</p>
+      <button class="primary" onclick="startGame('gonogo')">เล่น</button>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔄</div>
+      <h3>Cognitive Flexibility</h3>
+      <p>สลับกฎการตอบระหว่างการเล่น</p>
+      <button class="primary" onclick="startGame('flex')">เล่น</button>
+    </div>
+
+    <div class="card">
+      <div class="icon">🗼</div>
+      <h3>Tower Planning</h3>
+      <p>วางแผนการเคลื่อนย้าย disk ให้ใช้จำนวนครั้งน้อยที่สุด</p>
+      <button class="primary" onclick="startGame('tower')">เล่น</button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- GAME -->
+<section id="game" class="screen">
+
+  <div class="game-top">
+    <div>
+      <div id="gameTitle" class="game-title"></div>
+      <div id="gameSubtitle"></div>
+    </div>
+
+    <div class="badge">
+      Level <span id="level">1</span>/20
+    </div>
+  </div>
+
+  <div class="progress">
+    <div id="progressBar"></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <small>Trial</small>
+      <strong id="trialStat">0</strong>
+    </div>
+
+    <div class="stat">
+      <small>Accuracy</small>
+      <strong id="accuracyStat">—</strong>
+    </div>
+
+    <div class="stat">
+      <small>RT</small>
+      <strong id="rtStat">—</strong>
+    </div>
+
+    <div class="stat">
+      <small>Score</small>
+      <strong id="scoreStat">0</strong>
+    </div>
+  </div>
+
+  <div id="gamePanel" class="panel"></div>
+
+  <br>
+
+  <button class="secondary" onclick="quitGame()">← กลับ Games</button>
+
+</section>
+
+
+<!-- PROFILE -->
+<section id="profile" class="screen">
+
+  <div class="hero">
+    <h1>📊 Session Profile</h1>
+    <p>สถิติจากการเล่นใน session นี้</p>
+  </div>
+
+  <div id="profileContent"></div>
+
+  <br>
+
+  <button class="secondary" onclick="resetProfile()">
+    Reset Session
+  </button>
+
+</section>
+
+</div>
+
+
+<script>
+
+const GAME_INFO = {
+
+memory:{
+  title:"🧠 Sequence Memory",
+  subtitle:"Working Memory / Spatial Memory"
+},
+
+nback:{
+  title:"🔢 N-Back",
+  subtitle:"Working Memory / Updating"
+},
+
+stroop:{
+  title:"🎨 Stroop",
+  subtitle:"Selective Attention / Inhibition"
+},
+
+flanker:{
+  title:"➡️ Flanker",
+  subtitle:"Selective Attention / Conflict Processing"
+},
+
+reaction:{
+  title:"⚡ Reaction Time",
+  subtitle:"Processing Speed"
+},
+
+gonogo:{
+  title:"🛑 Go / No-Go",
+  subtitle:"Response Inhibition"
+},
+
+flex:{
+  title:"🔄 Cognitive Flexibility",
+  subtitle:"Set Shifting"
+},
+
+tower:{
+  title:"🗼 Tower Planning",
+  subtitle:"Planning / Executive Function"
+}
+
+};
+
+
+let currentGame = null;
+let level = 1;
+let trial = 0;
+let totalTrials = 8;
+let correct = 0;
+let attempts = 0;
+let reactionTimes = [];
+let score = 0;
+let gameData = {};
+let timer = null;
+let startTime = 0;
+let awaiting = false;
+let profile = {};
+
+
+function showScreen(id){
+
+  document.querySelectorAll(".screen")
+    .forEach(x=>x.classList.remove("active"));
+
+  document.getElementById(id)
+    .classList.add("active");
+}
+
+
+function startGame(game){
+
+  currentGame = game;
+
+  level = 1;
+  trial = 0;
+  correct = 0;
+  attempts = 0;
+  reactionTimes = [];
+  score = 0;
+  gameData = {};
+  awaiting = false;
+
+  clearTimeout(timer);
+
+  document.getElementById("gameTitle").textContent =
+    GAME_INFO[game].title;
+
+  document.getElementById("gameSubtitle").textContent =
+    GAME_INFO[game].subtitle;
+
+  showScreen("game");
+
+  updateStats();
+
+  nextTrial();
+}
+
+
+function quitGame(){
+
+  clearTimeout(timer);
+  currentGame = null;
+  showScreen("home");
+}
+
+
+function updateStats(){
+
+  document.getElementById("level").textContent = level;
+
+  document.getElementById("trialStat").textContent =
+    `${Math.min(trial,totalTrials)}/${totalTrials}`;
+
+  document.getElementById("accuracyStat").textContent =
+    attempts ? Math.round(correct/attempts*100)+"%" : "—";
+
+  const avg =
+    reactionTimes.length
+    ? Math.round(
+        reactionTimes.reduce((a,b)=>a+b,0) /
+        reactionTimes.length
+      )
+    : null;
+
+  document.getElementById("rtStat").textContent =
+    avg ? avg+" ms" : "—";
+
+  document.getElementById("scoreStat").textContent =
+    Math.round(score);
+
+  document.getElementById("progressBar").style.width =
+    Math.min(trial/totalTrials*100,100)+"%";
+}
+
+
+function nextTrial(){
+
+  clearTimeout(timer);
+
+  trial++;
+
+  updateStats();
+
+  if(trial > totalTrials){
+
+    endGame();
+    return;
+  }
+
+  if(currentGame==="memory") memoryGame();
+  if(currentGame==="nback") nbackGame();
+  if(currentGame==="stroop") stroopGame();
+  if(currentGame==="flanker") flankerGame();
+  if(currentGame==="reaction") reactionGame();
+  if(currentGame==="gonogo") goNoGoGame();
+  if(currentGame==="flex") flexGame();
+  if(currentGame==="tower") towerGame();
+}
+
+
+/* =========================
+   ADAPTIVE LEVEL
+========================= */
+
+function adaptLevel(){
+
+  if(attempts < 3) return;
+
+  const acc = correct/attempts;
+
+  if(acc >= .8 && level < 20){
+
+    level++;
+
+  }else if(acc < .5 && level > 1){
+
+    level--;
+  }
+
+  updateStats();
+}
+
+
+/* =========================
+   MEMORY
+========================= */
+
+function memoryGame(){
+
+  const size = Math.min(
+    3 + Math.floor((level-1)/4),
+    7
+  );
+
+  const sequenceLength =
+    Math.min(3 + Math.floor(level/2),8);
+
+  const sequence = [];
+
+  for(let i=0;i<sequenceLength;i++){
+
+    sequence.push(
+      Math.floor(Math.random()*size)
+    );
+  }
+
+  gameData.sequence = sequence;
+  gameData.user = [];
+  gameData.size = size;
+
+  const panel = document.getElementById("gamePanel");
+
+  panel.innerHTML = `
+    <div class="center">
+
+      <h2>จำตำแหน่ง</h2>
+
+      <p>
+        จำช่องที่สว่างตามลำดับ
+      </p>
+
+      <div id="memoryGrid"
+        style="
+        display:grid;
+        grid-template-columns:repeat(${size},1fr);
+        gap:8px;
+        max-width:500px;
+        margin:30px auto;
+        ">
+      </div>
+
+      <div id="memoryMsg" class="feedback">
+        กำลังแสดง...
+      </div>
+
+    </div>
+  `;
+
+  const grid = document.getElementById("memoryGrid");
+
+  for(let i=0;i<size;i++){
+
+    const b=document.createElement("button");
+
+    b.className="choice";
+    b.style.height="55px";
+    b.dataset.i=i;
+
+    b.onclick=()=>memoryClick(i);
+
+    grid.appendChild(b);
+  }
+
+  let i=0;
+
+  function show(){
+
+    if(i>=sequence.length){
+
+      document.getElementById("memoryMsg")
+        .textContent="ถึงตาคุณแล้ว";
+
+      return;
+    }
+
+    const buttons=grid.children;
+
+    buttons[sequence[i]].style.background="#6574cd";
+    buttons[sequence[i]].style.color="white";
+
+    timer=setTimeout(()=>{
+
+      buttons[sequence[i]].style.background="";
+      buttons[sequence[i]].style.color="";
+
+      i++;
+      show();
+
+    },Math.max(350,850-level*20));
+
+  }
+
+  show();
+}
+
+
+function memoryClick(index){
+
+  if(!gameData.sequence) return;
+
+  gameData.user.push(index);
+
+  const pos=gameData.user.length-1;
+
+  if(index!==gameData.sequence[pos]){
+
+    attempts++;
+    recordResult(false,null);
+
+    document.getElementById("memoryMsg")
+      .textContent="ไม่ถูกต้อง";
+
+    setTimeout(nextTrial,500);
+
+    return;
+  }
+
+  if(gameData.user.length===gameData.sequence.length){
+
+    attempts++;
+    correct++;
+
+    score+=100;
+
+    recordResult(true,null);
+
+    document.getElementById("memoryMsg")
+      .textContent="ถูกต้อง ✓";
+
+    setTimeout(nextTrial,500);
+  }
+}
+
+
+/* =========================
+   N BACK
+========================= */
+
+function nbackGame(){
+
+  const n =
+    Math.min(1+Math.floor((level-1)/7),3);
+
+  const total=12;
+
+  let index=0;
+  let hits=0;
+  let falseAlarms=0;
+
+  const sequence=[];
+
+  for(let i=0;i<total;i++){
+
+    if(i>=n && Math.random()<.35){
+
+      sequence.push(sequence[i-n]);
+
+    }else{
+
+      let x=Math.floor(Math.random()*4);
+
+      if(i>=n){
+
+        while(x===sequence[i-n]){
+          x=Math.floor(Math.random()*4);
+        }
+      }
+
+      sequence.push(x);
+    }
+  }
+
+  gameData.n=n;
+  gameData.seq=sequence;
+  gameData.index=0;
+  gameData.nHits=0;
+  gameData.nCorrect=0;
+  gameData.nTotal=0;
+
+  const panel=document.getElementById("gamePanel");
+
+  panel.innerHTML=`
+    <div class="center">
+
+      <h2>${n}-Back</h2>
+
+      <p>กด MATCH หากตัวปัจจุบันตรงกับ ${n} ตำแหน่งก่อนหน้า</p>
+
+      <div class="stimulus" id="nStimulus">●</div>
+
+      <div class="choice-grid">
+
+        <button class="choice" onclick="nbackAnswer(true)">
+          MATCH
+        </button>
+
+        <button class="choice" onclick="nbackAnswer(false)">
+          NO MATCH
+        </button>
+
+      </div>
+
+      <div id="nMsg" class="feedback"></div>
+
+    </div>
+  `;
+
+  showNBack();
+}
+
+
+function showNBack(){
+
+  if(gameData.index>=gameData.seq.length){
+
+    attempts += gameData.nTotal;
+    correct += gameData.nCorrect;
+
+    score += gameData.nCorrect/gameData.nTotal*100;
+
+    adaptLevel();
+    setTimeout(nextTrial,700);
+
+    return;
+  }
+
+  const value=gameData.seq[gameData.index];
+
+  const symbols=["●","■","▲","◆"];
+
+  document.getElementById("nStimulus")
+    .textContent=symbols[value];
+
+  gameData.currentCorrect =
+    gameData.index>=gameData.n &&
+    value===gameData.seq[gameData.index-gameData.n];
+
+  gameData.answered=false;
+
+  startTime=performance.now();
+
+  timer=setTimeout(()=>{
+
+    if(!gameData.answered){
+
+      gameData.nTotal++;
+
+      if(!gameData.currentCorrect){
+        gameData.nCorrect++;
+      }
+
+      gameData.index++;
+
+      showNBack();
+    }
+
+  },Math.max(1000,1800-level*30));
+}
+
+
+function nbackAnswer(answer){
+
+  if(gameData.answered) return;
+
+  gameData.answered=true;
+
+  const rt=performance.now()-startTime;
+
+  reactionTimes.push(rt);
+
+  const ok=answer===gameData.currentCorrect;
+
+  gameData.nTotal++;
+
+  if(ok) gameData.nCorrect++;
+
+  document.getElementById("nMsg")
+    .textContent=ok ? "✓" : "✕";
+
+  gameData.index++;
+
+  setTimeout(showNBack,250);
+}
+
+
+/* =========================
+   STROOP
+========================= */
+
+function stroopGame(){
+
+  const colors=[
+    ["RED","#d33"],
+    ["BLUE","#2878d4"],
+    ["GREEN","#29965b"],
+    ["YELLOW","#d2a600"]
+  ];
+
+  const word=colors[Math.floor(Math.random()*4)];
+  const ink=colors[Math.floor(Math.random()*4)];
+
+  gameData.answer=ink[0];
+
+  const panel=document.getElementById("gamePanel");
+
+  panel.innerHTML=`
+    <div class="center">
+
+      <h2>สีหมึกคือสีอะไร?</h2>
+
+      <div class="stimulus"
+           style="color:${ink[1]}">
+        ${word[0]}
+      </div>
+
+      <div class="choice-grid">
+
+        ${colors.map(c=>`
+          <button
+            class="choice"
+            onclick="answerChoice('${c[0]}')">
+            ${c[0]}
+          </button>
+        `).join("")}
+
+      </div>
+
+      <div id="stroopMsg" class="feedback"></div>
+
+    </div>
+  `;
+
+  startTime=performance.now();
+}
+
+
+function answerChoice(answer){
+
+  if(awaiting) return;
+
+  awaiting=true;
+
+  const rt=performance.now()-startTime;
+
+  reactionTimes.push(rt);
+
+  attempts++;
+
+  const ok=answer===gameData.answer;
+
+  if(ok){
+    correct++;
+    score+=100;
+  }
+
+  document.getElementById("stroopMsg")
+    .textContent=ok ? "✓ ถูกต้อง" : "✕";
+
+  adaptLevel();
+
+  setTimeout(()=>{
+    awaiting=false;
+    nextTrial();
+  },400);
+}
+
+
+/* =========================
+   FLANKER
+========================= */
+
+function flankerGame(){
+
+  const right=Math.random()<.5;
+
+  const congruent=Math.random()<
+    Math.max(.35,.75-level*.015);
+
+  const center=right?"→":"←";
+
+  let arrows;
+
+  if(congruent){
+
+    arrows=right
+      ?"→→→→→"
+      :"←←←←←";
+
+  }else{
+
+    arrows=right
+      ?"←←→←←"
+      :"→→←→→";
+  }
+
+  gameData.answer=center;
+
+  const panel=document.getElementById("gamePanel");
+
+  panel.innerHTML=`
+    <div class="center">
+
+      <h2>ทิศทางของลูกศรตรงกลาง</h2>
+
+      <div class="stimulus"
+           style="font-size:65px">
+        ${arrows}
+      </div>
+
+      <div class="choice-grid">
+
+        <button class="big-button"
+          onclick="flankerAnswer('←')">
+          ←
+        </button>
+
+        <button class="big-button"
+          onclick="flankerAnswer('→')">
+          →
+        </button>
+
+      </div>
+
+    </div>
+  `;
+
+  startTime=performance.now();
+}
+
+
+function flankerAnswer(answer){
+
+  if(awaiting)return;
+
+  awaiting=true;
+
+  const rt=performance.now()-startTime;
+
+  reactionTimes.push(rt);
+
+  attempts++;
+
+  const ok=answer===gameData.answer;
+
+  if(ok){
+    correct++;
+    score+=100;
+  }
+
+  adaptLevel();
+
+  setTimeout(()=>{
+    awaiting=false;
+    nextTrial();
+  },350);
+}
+
+
+/* =========================
+   REACTION TIME
+========================= */
+
+function reactionGame(){
+
+  const panel=document.getElementById("gamePanel");
+
+  panel.innerHTML=`
+    <div class="center">
+
+      <h2>Reaction Time</h2>
+
+      <p id="reactionMsg">
+        รอจน stimulus เปลี่ยน แล้วกดทันที
+      </p>
+
+      <button id="reactionButton"
+        class="big-button"
+        style="margin-top:40px"
+        onclick="reactionClick()">
+        WAIT
+      </button>
+
+    </div>
+  `;
+
+  awaiting=false;
+
+  const delay=
+    800+
+    Math.random()*
+    Math.max(700,2200-level*60);
+
+  timer=setTimeout(()=>{
+
+    awaiting=true;
+
+    const button=
+      document.getElementById("reactionButton");
+
+    button.textContent="CLICK!";
+    button.style.background="#d33";
+
+    startTime=performance.now();
+
+  },delay);
+}
+
+
+function reactionClick(){
+
+  if(!awaiting){
+
+    clearTimeout(timer);
+
+    attempts++;
+
+    document.getElementById("reactionMsg")
+      .textContent="เร็วเกินไป — false start";
+
+    setTimeout(nextTrial,600);
+
+    return;
+  }
+
+  awaiting=false;
+
+  const rt=performance.now()-startTime;
+
+  reactionTimes.push(rt);
+
+  attempts++;
+  correct++;
+
+  score+=Math.max(20,120-rt/8);
+
+  document.getElementById("reactionMsg")
+    .textContent=`Reaction time: ${Math.round(rt)} ms`;
+
+  adaptLevel();
+
+  setTimeout(nextTrial,700);
+}
+
+
+/* =========================
+   GO NO GO
+========================= */
+
+function goNoGoGame(){
+
+  const isGo=Math.random()<.7;
+
+  gameData.isGo=isGo;
+  gameData.answered=false;
+
+  const panel=document.getElementById("gamePanel");
+
+  panel.innerHTML=`
+    <div class="center">
+
+      <h2>${isGo?"GO":"NO-GO"}</h2>
+
+      <div class="stimulus">
+        ${isGo?"●":"✕"}
+      </div>
+
+      <button
+        class="big-button"
+        onclick="goNoGoClick()">
+        GO
+      </button>
+
+      <div class="feedback">
+        ${isGo
+          ?"กดปุ่ม"
+          :"ห้ามกดปุ่ม"}
+      </div>
+
+    </div>
+  `;
+
+  timer=setTimeout(()=>{
+
+    if(gameData.answered)return;
+
+    attempts++;
+
+    if(!isGo){
+
+      correct++;
+      score+=100;
+
+    }
+
+    adaptLevel();
+
+    nextTrial();
+
+  },900);
+}
+
+
+function goNoGoClick(){
+
+  if(gameData.answered)return;
+
+  gameData.answered=true;
+
+  clearTimeout(timer);
+
+  const rt=performance.now()-startTime;
+
+  attempts++;
+
+  if(gameData.isGo){
+
+    correct++;
+    score+=100;
+
+    reactionTimes.push(rt);
+
+  }
+
+  adaptLevel();
+
+  setTimeout(nextTrial,350);
+}
+
+
+/* =========================
+   FLEXIBILITY
+========================= */
+
+function flexGame(){
+
+  const rule=
+    Math.floor((trial-1)/2)%2===0
+      ?"NUMBER"
+      :"SHAPE";
+
+  const number=Math.floor(Math.random()*10);
+
+  const shapes=["●","▲","■"];
+
+  const shape=
+    shapes[Math.floor(Math.random()*shapes.length)];
+
+  gameData.rule=rule;
+
+  let correctAnswer;
+
+  if(rule==="NUMBER"){
+
+    correctAnswer=
+      number%2===0
+        ?"EVEN"
+        :"ODD";
+
+  }else{
+
+    correctAnswer=shape;
+  }
+
+  gameData.answer=correctAnswer;
+
+  const panel=document.getElementById("gamePanel");
+
+  panel.innerHTML=`
+    <div class="center">
+
+      <h2>Rule: ${rule}</h2>
+
+      <div class="stimulus">
+        ${number} ${shape}
+      </div>
+
+      <p>
+        ${rule==="NUMBER"
+          ?"เลขเป็นคู่หรือคี่?"
+          :"เลือก shape ที่เห็น"}
+      </p>
+
+      <div class="choice-grid">
+
+        ${
+          rule==="NUMBER"
+
+          ?`
+          <button class="choice"
+            onclick="flexAnswer('EVEN')">
+            EVEN
+          </button>
+
+          <button class="choice"
+            onclick="flexAnswer('ODD')">
+            ODD
+          </button>
+          `
+
+          :
+
+          shapes.map(x=>`
+            <button class="choice"
+              onclick="flexAnswer('${x}')">
+              ${x}
+            </button>
+          `).join("")
+        }
+
+      </div>
+
+    </div>
+  `;
+
+  startTime=performance.now();
+}
+
+
+function flexAnswer(answer){
+
+  if(awaiting)return;
+
+  awaiting=true;
+
+  const rt=performance.now()-startTime;
+
+  reactionTimes.push(rt);
+
+  attempts++;
+
+  const ok=answer===gameData.answer;
+
+  if(ok){
+
+    correct++;
+    score+=100;
+
+  }
+
+  adaptLevel();
+
+  setTimeout(()=>{
+    awaiting=false;
+    nextTrial();
+  },450);
+}
+
+
+/* =========================
+   TOWER OF HANOI
+========================= */
+
+function towerGame(){
+
+  const disks=
+    Math.min(
+      3+Math.floor((level-1)/5),
+      5
+    );
+
+  gameData.disks=disks;
+
+  gameData.towers=[
+    Array.from(
+      {length:disks},
+      (_,i)=>disks-i
+    ),
+    [],
+    []
+  ];
+
+  gameData.selected=null;
+  gameData.moves=0;
+
+  drawTower();
+}
+
+
+function drawTower(){
+
+  const panel=document.getElementById("gamePanel");
+
+  panel.innerHTML=`
+
+    <div class="center">
+
+      <h2>Tower Planning</h2>
+
+      <p>
+        ย้าย disk ทั้งหมดจาก peg 1 → peg 3
+      </p>
+
+      <div class="rules">
+        • ย้ายได้ครั้งละ 1 disk<br>
+        • ห้ามวาง disk ใหญ่บน disk เล็ก<br>
+        • พยายามใช้จำนวน move ให้น้อยที่สุด
+      </div>
+
+      <div class="tower">
+
+        ${gameData.towers.map((tower,i)=>`
+
+          <button
+            class="peg ${gameData.selected===i?"selected":""}"
+            onclick="towerClick(${i})">
+
+            ${tower.map(d=>`
+              <div class="disk disk${d}">
+                ${d}
+              </div>
+            `).join("")}
+
+          </button>
+
+        `).join("")}
+
+      </div>
+
+      <p>
+        Moves: <b>${gameData.moves}</b>
+        &nbsp; | &nbsp;
+        Optimal: <b>${Math.pow(2,gameData.disks)-1}</b>
+      </p>
+
+      <div id="towerMsg" class="feedback"></div>
+
+    </div>
+  `;
+}
+
+
+function towerClick(index){
+
+  if(gameData.selected===null){
+
+    if(gameData.towers[index].length===0)return;
+
+    gameData.selected=index;
+
+    drawTower();
+
+    return;
+  }
+
+  const from=gameData.selected;
+  const to=index;
+
+  if(from===to){
+
+    gameData.selected=null;
+    drawTower();
+    return;
+  }
+
+  const source=gameData.towers[from];
+  const target=gameData.towers[to];
+
+  const disk=source[source.length-1];
+
+  const targetTop=
+    target[target.length-1];
+
+  if(targetTop && targetTop<disk){
+
+    document.getElementById("towerMsg")
+      .textContent="ย้ายไม่ได้: disk ใหญ่กว่า";
+
+    gameData.selected=null;
+
+    drawTower();
+
+    return;
+  }
+
+  source.pop();
+  target.push(disk);
+
+  gameData.moves++;
+  gameData.selected=null;
+
+  drawTower();
+
+  if(
+    gameData.towers[2].length===
+    gameData.disks
+  ){
+
+    const optimal=
+      Math.pow(2,gameData.disks)-1;
+
+    const efficiency=
+      Math.max(
+        0,
+        100-
+        (gameData.moves-optimal)*10
+      );
+
+    attempts++;
+    correct++;
+
+    score+=efficiency;
+
+    adaptLevel();
+
+    document.getElementById("towerMsg")
+      .textContent=
+      `สำเร็จ! Efficiency ${Math.round(efficiency)}%`;
+
+    setTimeout(nextTrial,1200);
+  }
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+function recordResult(ok,rt){
+
+  if(rt!==null){
+    reactionTimes.push(rt);
+  }
+
+  if(ok){
+    correct++;
+    score+=100;
+  }
+
+  adaptLevel();
+}
+
+
+function endGame(){
+
+  clearTimeout(timer);
+
+  const accuracy=
+    attempts
+    ?Math.round(correct/attempts*100)
+    :0;
+
+  const avgRT=
+    reactionTimes.length
+    ?Math.round(
+      reactionTimes.reduce((a,b)=>a+b,0)/
+      reactionTimes.length
+    )
+    :null;
+
+  profile[currentGame]={
+    level,
+    accuracy,
+    avgRT,
+    score:Math.round(score),
+    played:(profile[currentGame]?.played||0)+1
+  };
+
+  const panel=document.getElementById("gamePanel");
+
+  panel.innerHTML=`
+
+    <div class="center">
+
+      <div style="font-size:65px">
+        🎉
+      </div>
+
+      <h2>Game Complete</h2>
+
+      <div class="stats">
+
+        <div class="stat">
+          <small>Accuracy</small>
+          <strong>${accuracy}%</strong>
+        </div>
+
+        <div class="stat">
+          <small>Average RT</small>
+          <strong>${avgRT?avgRT+" ms":"—"}</strong>
+        </div>
+
+        <div class="stat">
+          <small>Score</small>
+          <strong>${Math.round(score)}</strong>
+        </div>
+
+        <div class="stat">
+          <small>Level</small>
+          <strong>${level}</strong>
+        </div>
+
+      </div>
+
+      <p>
+        คะแนนนี้สะท้อน performance ในเกม session นี้
+        ไม่ใช่ IQ หรือการวินิจฉัยทางคลินิก
+      </p>
+
+      <button class="primary"
+        onclick="startGame('${currentGame}')">
+        เล่นอีกครั้ง
+      </button>
+
+      <button class="secondary"
+        onclick="showScreen('home')">
+        เลือกเกมอื่น
+      </button>
+
+    </div>
+  `;
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+function showProfile(){
+
+  showScreen("profile");
+
+  const el=document.getElementById("profileContent");
+
+  const names={
+    memory:"🧠 Sequence Memory",
+    nback:"🔢 N-Back",
+    stroop:"🎨 Stroop",
+    flanker:"➡️ Flanker",
+    reaction:"⚡ Reaction Time",
+    gonogo:"🛑 Go / No-Go",
+    flex:"🔄 Cognitive Flexibility",
+    tower:"🗼 Tower Planning"
+  };
+
+  const keys=Object.keys(profile);
+
+  if(!keys.length){
+
+    el.innerHTML=`
+      <div class="hero">
+        <h2>ยังไม่มีข้อมูล</h2>
+        <p>ลองเล่นเกมสักเกมก่อนฮะ</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  el.innerHTML=`
+
+    <div class="profile-grid">
+
+      ${keys.map(key=>{
+
+        const p=profile[key];
+
+        return `
+
+          <div class="profile-card">
+
+            <h3>${names[key]}</h3>
+
+            <p>
+              Played: ${p.played}
+            </p>
+
+            <p>
+              Accuracy:
+              <b>${p.accuracy}%</b>
+            </p>
+
+            <div class="bar">
+              <div style="width:${p.accuracy}%"></div>
+            </div>
+
+            <p>
+              Average RT:
+              <b>${p.avgRT?p.avgRT+" ms":"—"}</b>
+            </p>
+
+            <p>
+              Highest Level:
+              <b>${p.level}/20</b>
+            </p>
+
+            <p>
+              Score:
+              <b>${p.score}</b>
+            </p>
+
+          </div>
+
+        `;
+
+      }).join("")}
+
+    </div>
+
+    <div class="hero" style="margin-top:20px">
+
+      <h3>Interpretation note</h3>
+
+      <p>
+        เกมเหล่านี้ใช้ paradigm ทาง cognitive psychology
+        เช่น working memory, inhibition, attention,
+        processing speed และ executive function
+        แต่ผลการเล่นขึ้นกับหลายปัจจัย เช่น familiarity,
+        fatigue, device, input latency และ learning effect
+        จึงไม่ควรนำคะแนนไปตีความเป็นความสามารถทางคลินิก
+        โดยตรง
+      </p>
+
+    </div>
+  `;
+}
+
+
+function resetProfile(){
+
+  if(confirm("ล้างข้อมูล session ทั้งหมดหรือไม่?")){
+
+    profile={};
+
+    showProfile();
+  }
+}
+
+</script>
+
+</body>
+</html>
